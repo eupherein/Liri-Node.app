@@ -1,0 +1,26 @@
+{
+  "name": "liri-node.app",
+  "version": "1.0.0",
+  "description": "For use to display understanding of calling API via Node",
+  "main": "Liri.js",
+  "dependencies": {
+    "dotenv": "^4.0.0",
+    "request": "^2.83.0",
+    "spotify": "^0.3.0",
+    "twitter": "^1.7.1"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/eupherein/Liri-Node.app.git"
+  },
+  "author": "Derek Bocskey",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/eupherein/Liri-Node.app/issues"
+  },
+  "homepage": "https://github.com/eupherein/Liri-Node.app#readme"
+}
