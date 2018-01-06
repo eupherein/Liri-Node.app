@@ -2,7 +2,7 @@
   "name": "liri-node.app",
   "version": "1.0.0",
   "description": "For use to display understanding of calling API via Node",
-  "main": "Liri.js",
+  "main": "liri.js",
   "dependencies": {
     "dotenv": "^4.0.0",
     "request": "^2.83.0",
