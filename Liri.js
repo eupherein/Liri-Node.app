@@ -6,7 +6,7 @@ var keys = require('./keys');
 //variables to store packages
 var fs = require('fs');
 var twitter = require('twitter');
-//var spotify = require('spotify');
+var spotify = require('node-spotify-api');
 var request = require('request');
 
 //argv stuff
@@ -15,9 +15,10 @@ var userInput = process.argv[2];
 var searchInput = "";
 
 for (i = 3; i < process.argv.length; i++)
-    searchInput += procress.argv[i] + "+"
-//code required to import key.js
-//var spotify = new Spotify(keys.spotify);
+    searchInput += process.argv[i] + "+"
+
+    //code required to import key.js
+var spotify = new spotify(keys.spotify);
 var client = new twitter(keys.twitter);
 
 //function for pulling 20 tweets from twitter api
@@ -36,7 +37,7 @@ function showTweets() {
 //function for searching spotify song 
 function searchSong() {
     console.log("result: ")
-    spotify.search({ type: 'track', query: 'dancing in the moonlight' }, function(err, data) {
+    spotify.search({ type: 'track', query: searchInput}, function(err, data) {
         if ( err ) {
             console.log('Error occurred: ' + err);
             return;
@@ -44,7 +45,8 @@ function searchSong() {
      
         // Do something with 'data'   
         var songInfo = response.tracks.items[0];
-  // console.log(songInfo);
+  
+        // console.log(songInfo);
   console.log("Artist:", songInfo.album.artists[0].name);
   console.log("Song:", songInfo.name);
   console.log("Preview link:", songInfo.preview_url);
@@ -59,12 +61,12 @@ switch(userInput) {
         showTweets();
         break;
     case 'spotify-this-song':
-        console.log("\n spofity fired! \n");
+        console.log("\n spotify fired! \n");
         searchSong();
         break;
     case 'movie-this':
         console.log("\n ombd fired! \n");
-        searchOmbd();
+        //searchOmbd();
     case 'do-what-it-says':
         console.log("\n doThis fired! \n");
 }
