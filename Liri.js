@@ -60,7 +60,7 @@ switch(userInput) {
         console.log("\n twitter fired! \n");
         showTweets();
         break;
-    case 'spotify-this-song':
+    case 'spotify':
         console.log("\n spotify fired! \n");
         searchSong();
         break;
