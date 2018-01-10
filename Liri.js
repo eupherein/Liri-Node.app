@@ -32,9 +32,9 @@ var artistName = function (artist) {
     return artist.name;
 };
 
-var songSearch = function (songInput) {
+var searchSong = function (songInput) {
     if (songInput === undefined) {
-        songInput = "not found!"
+        songInput = "not found!";
     }
 
     // function for searching for song
@@ -53,21 +53,24 @@ var songSearch = function (songInput) {
             var songInfo = data.tracks.items;
 
 
-            for (var i = 0; i < songs.length; i++) {
+            for (var i = 0; i < songInfo.length; i++) {
 
                 // console.log(songInfo);
                 console.log(i);
-                console.log("Artist:" + songInfo[i].album.artists[0].name);
-                console.log("Song:" + songInfo[i].name);
-                console.log("Preview link:" + songInfo[i].preview_url);
-                console.log("Album:" + songInfo[i].album.name);
+                console.log("Artist: " + songInfo[i].artists.map(artistName));
+                console.log("Song: " + songInfo[i].name);
+                console.log("Preview link: " + songInfo[i].preview_url);
+                console.log("Album: " + songInfo[i].album.name);
             }
         }
     );
 };
 
 //function for searching omdb movie
-var searchMovie = function () {
+var searchMovie = function (movieName) {
+    if (movieName === undefined) {
+        movieName = "movie not found!";
+    }
     console.log("result: ")
     //api call for movie title search
     var queryUrl = "http://www.omdbapi.com/?t=" + movieName + "&y=&plot=short&apikey=trilogy";
@@ -79,34 +82,47 @@ var searchMovie = function () {
 
         // If the request is successful
         if (!error && response.statusCode === 200) {
+            var jsonData = JSON.parse(body);
 
             // Parse the body of the site and recover just the imdbRating
-            // (Note: The syntax below for parsing isn't obvious. Just spend a few moments dissecting it).
-            console.log("Release Year: " + JSON.parse(body).Year);
+            //to full info from the movie object and disaply it interminal
+            
+            console.log("Year: " + jsonData.Year);
+            console.log("Plot: " + jsonData.Plot);
+            console.log("Rated: " + jsonData.Rated);
+            console.log("Title: " + jsonData.Title);
+            console.log("Actors: " + jsonData.Actors);
+            console.log("Country: " + jsonData.Country);
+            console.log("Language: " + jsonData.Language);
+            console.log("IMDB Rating: " + jsonData.imdbRating);
+            console.log("Link to Rotton Tomatoes: " + jsonData.tomatoURL);
         }
     });
-}
+};
 
 //switch method
 var choose = function (caseData, functionData) {
-    switch (userInput) {
+    switch (caseData) {
         case 'tweets':
             console.log("\n twitter fired! \n");
             showTweets();
             break;
         case 'spotify':
             console.log("\n spotify fired! \n");
-            searchSong();
+            searchSong(functionData);
             break;
         case 'movie':
             console.log("\n ombd fired! \n");
-            searchMovie();
+            searchMovie(functionData);
         case 'do':
             console.log("\n doThis fired! \n");
     }
 };
 
-//function for running the function being called on in
+//function for running the function being called on in the terminal
+var runLiri = function (argOne, argTwo) {
+    choose(argOne, argTwo)
+};
 
 //runs the stuff
-runStuff(process.argv[2], process.argv[3])
+runLiri(process.argv[2], process.argv[3])
